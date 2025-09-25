@@ -1,11 +1,9 @@
 import app from "./app"
-import dotenv from 'dotenv';
 import { prismaConnect } from "./config/prisma";
 import { initGlobalCategories } from "./services/globalCategories.service";
+import { env } from './config/env'
 
-dotenv.config();
-
-const PORT = Number(process.env.PORT);
+const PORT = env.PORT;
 
 const startServer = async () => {
     try {
@@ -15,6 +13,7 @@ const startServer = async () => {
         await app.listen({
             port: PORT,
         }).then(() => console.log(`🟢 Server rodando na porta ${PORT}...`))
+
     } catch (error) {
         console.error(error);
     }

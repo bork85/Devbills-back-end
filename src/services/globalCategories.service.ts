@@ -35,10 +35,10 @@ export const initGlobalCategories = async () : Promise<Category[]> => {
             })
             if(!existing){
                 const newCategory = await prisma.category.create({data:category})
-                console.log(`☑ Categoria ${newCategory.name}-${newCategory.type} criada!`)
+                console.log(`☑ Categoria ${newCategory.type}-${newCategory.name} criada!`)
                 createdCategories.push(newCategory)
             } else {
-                console.log(`⚠ Categoria ${existing.name}-${existing.type} já existe!`)
+                console.log(`⚠ Categoria ${existing.type}-${existing.name} já existe!`)
                 createdCategories.push(existing)
             }
         } catch (error) {

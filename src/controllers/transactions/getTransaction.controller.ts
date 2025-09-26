@@ -7,8 +7,8 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc);
 
 export const getTransaction = async(request:FastifyRequest, reply:FastifyReply):Promise<void> => {
-    const userId = "bork85"; 
-    console.log(userId)
+    const userId = request.userId; 
+
     if(!userId){
         reply.status(500).send({error: "Usuário não autenticado!"})
         return

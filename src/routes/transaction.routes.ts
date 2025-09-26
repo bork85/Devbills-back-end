@@ -1,14 +1,13 @@
 import type { FastifyInstance } from "fastify"
 import createTransaction from "../controllers/transactions/createTransaction.controller"
-import { zodToJsonSchema } from "zod-to-json-schema";
-import { createTransactionSchema, deleteTransactionSchema, getTransactionSchema, getTransactionSummarySchema } from "../schemas/transaction.schema";
-//import { object } from "zod";
 import { getTransaction } from "../controllers/transactions/getTransaction.controller";
 import { getTransactionsSummary } from "../controllers/transactions/getTransactionsSummary.controller";
-import { object } from "zod";
 import { deleteTransaction } from "../controllers/transactions/deleteTransaction.controller";
+import { AuthMiddleware } from "../middlewares/auth.middlewares";
 
 const transactionRoutes = async (fastify:FastifyInstance)=>{
+    fastify.addHook("preHandler", AuthMiddleware);
+
     // criar transação
     fastify.route({
         method: "POST",

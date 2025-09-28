@@ -16,12 +16,13 @@ export const AuthMiddleware = async (request: FastifyRequest, reply: FastifyRepl
     const token = authHeader.replace("Bearer ", "");
     try {
         const decodedToken = await admin.auth().verifyIdToken(token);
+        //console.log(decodedToken)
         request.userId = decodedToken.uid;        
     } catch (error) {
         if (error instanceof Error) {
             // Agora o TypeScript sabe que 'error' é do tipo 'Error'
             console.error(error.message); 
-            
+            //console.log(authHeader)
         } else{
             const message = typeof error === 'string' ? error : "Token inválido ou expirado!";
             request.log.error(`Erro ao verificar token: ${message}`);

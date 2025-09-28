@@ -24,10 +24,17 @@ export const getTransactionSummarySchema = z.object({
     year: z.string({message: "Valor ANO inválido"}),   
 });
 
+export const getHistoricalSummarySchema = z.object({
+    month: z.coerce.number().min(1).max(12),
+    year: z.coerce.number().min(2000).max(3000), 
+    monthHist: z.coerce.number().min(1).max(12).optional(),
+});
+
 export const deleteTransactionSchema = z.object({
     id: z.string().refine(isValidObjectId, {message:"ID Inválido"}),
 });
 
-export type getTransactionQuery =z.infer<typeof getTransactionSchema>;
-export type getTransactionSummaryQuery =z.infer<typeof getTransactionSummarySchema>;
-export type deleteTransactionParams = z.infer<typeof deleteTransactionSchema>;
+export type GetTransactionQuery =z.infer<typeof getTransactionSchema>;
+export type GetTransactionSummaryQuery =z.infer<typeof getTransactionSummarySchema>;
+export type DeleteTransactionParams = z.infer<typeof deleteTransactionSchema>;
+export type GetHistoricalSummaryQuery = z.infer<typeof getHistoricalSummarySchema>;

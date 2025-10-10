@@ -6,7 +6,12 @@ import cors from '@fastify/cors'
 const app:FastifyInstance = Fastify({
     logger: true
 });
-app.register(cors);
+app.register(cors, {
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
+}
+    
+);
 app.register(routes);
 
 export default app;

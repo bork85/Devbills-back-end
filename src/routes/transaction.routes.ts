@@ -4,8 +4,6 @@ import { getTransaction } from "../controllers/transactions/getTransaction.contr
 import { getTransactionsSummary } from "../controllers/transactions/getTransactionsSummary.controller";
 import { deleteTransaction } from "../controllers/transactions/deleteTransaction.controller";
 import { AuthMiddleware } from "../middlewares/auth.middlewares";
-import {zodToJsonSchema} from 'zod-to-json-schema';
-import { getHistoricalSummarySchema } from "../schemas/transaction.schema";
 import { getHistoricalSummary } from "../controllers/transactions/getHistoricalSummary.controller";
 
 const transactionRoutes = async (fastify:FastifyInstance)=>{

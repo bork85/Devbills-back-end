@@ -3,23 +3,23 @@ import { prismaConnect } from "./config/prisma";
 import { initGlobalCategories } from "./services/globalCategories.service";
 import { env } from './config/env'
 import initialyzeFirebaseAdmin from "./config/firebase";
-import fastify from "fastify";
 
 const PORT = env.PORT;
 
 initialyzeFirebaseAdmin();
 
-const startServer = async () => {
+const initAsyncServices = async () => {
     try {
         await prismaConnect();
-        await initGlobalCategories()
-
-        /* await app.listen({
-            port: PORT,
-        }).then(() => console.log(`🟢 Server rodando na porta ${PORT}...`)) */
-        module.exports = fastify;
+        await initGlobalCategories();
+        console.log('✅ Inicialização de serviços completa (Cold Start).');
     } catch (error) {
-        console.error(error);
+        console.error('❌ Erro na inicialização de serviços:', error);
+        // O log de erro será crucial se a aplicação não funcionar.
     }
 }
-startServer();
+initAsyncServices();
+
+// 3. Exportação Direta do Handler (CRUCIAL PARA O VERCEL)
+// Este é o objeto que a Vercel espera para rotear as requisições.
+module.exports = app;

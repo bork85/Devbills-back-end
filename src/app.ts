@@ -4,7 +4,8 @@ import type { FastifyInstance } from 'fastify';
 import cors from '@fastify/cors'
 
 const app:FastifyInstance = Fastify({
-    logger: true
+    logger: true,
+    //readyContext: { initialised: false },
 });
 app.register(cors, {
     origin: true,
@@ -13,5 +14,4 @@ app.register(cors, {
     
 );
 app.register(routes);
-
 export default app;
